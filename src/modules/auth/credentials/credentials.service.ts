@@ -1,7 +1,7 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { comparePasswords } from 'src/common';
+import { UsersService } from 'src/modules/users/users.service';
 
-import { comparePasswords } from '../../users/hash.helper';
-import { UsersService } from '../../users/users.service';
 import { AuthResService } from '../auth-res.service';
 import { LoginUserDto, RegisterUserDto } from '../dtos';
 

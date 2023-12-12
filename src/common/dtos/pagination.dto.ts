@@ -1,7 +1,7 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNumber, IsOptional } from 'class-validator';
 
-import { ITEMS_PER_PAGE_DEFAULT, PAGE_DEFAULT } from '../constants';
+import { ITEMS_PER_PAGE_DEFAULT, PAGE_DEFAULT } from '../lib/constants';
 
 export class PaginationDto {
   @IsNumber()

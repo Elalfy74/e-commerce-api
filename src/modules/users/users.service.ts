@@ -1,10 +1,9 @@
 import { ConflictException, Injectable } from '@nestjs/common';
 import { Prisma, User } from '@prisma/client';
 import { PrismaService } from 'nestjs-prisma';
-import { getWhereQuerySearch } from 'src/common/utils';
+import { getWhereQuerySearch, hashPassword } from 'src/common';
 
 import { CreateUserDto, FindManyUsersDto } from './dtos';
-import { hashPassword } from './hash.helper';
 
 @Injectable()
 export class UsersService {

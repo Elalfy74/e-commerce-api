@@ -12,7 +12,7 @@ class EnvironmentVariables {
   ACCESS_TOKEN_SECRET: string;
 }
 
-export function validate(config: Record<string, unknown>) {
+export function validateEnv(config: Record<string, unknown>) {
   const validatedConfig = plainToInstance(EnvironmentVariables, config, {
     enableImplicitConversion: true,
   });

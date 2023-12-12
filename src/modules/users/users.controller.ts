@@ -22,6 +22,7 @@ export class UsersController {
   @Get()
   @ApiOkResponse({ type: [UserDto] })
   async find(@Query() query: FindManyUsersDto) {
+    console.log(query);
     return this.usersService.find(query);
   }
 

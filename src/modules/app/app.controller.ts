@@ -7,4 +7,11 @@ export class AppController {
   @Get()
   @Redirect('/docs')
   redirect() {}
+
+  @Get('/health')
+  health() {
+    return {
+      status: 'ok',
+    };
+  }
 }
