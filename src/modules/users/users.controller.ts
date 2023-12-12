@@ -1,12 +1,21 @@
-import { Body, Controller, Get, Param, Post, Query, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  NotFoundException,
+  Param,
+  Post,
+  Query,
+  UseGuards,
+} from '@nestjs/common';
 import { ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { AdminGuard, JwtGuard, Serialize } from 'src/common';
+import { AdminGuard, IdDto, Serialize } from 'src/common';
 
 import { CreateUserDto, FindManyUsersDto, UserDto } from './dtos';
 import { UsersService } from './users.service';
 
 @Controller('users')
-@UseGuards(JwtGuard, AdminGuard)
+@UseGuards(AdminGuard)
 @Serialize(UserDto)
 @ApiTags('Users')
 @ApiBearerAuth()
@@ -22,15 +31,20 @@ export class UsersController {
   @Get()
   @ApiOkResponse({ type: [UserDto] })
   async find(@Query() query: FindManyUsersDto) {
-    console.log(query);
     return this.usersService.find(query);
   }
 
   @Get(':id')
   @ApiOkResponse({ type: UserDto })
-  async findOne(@Param('id') id: string) {
-    return this.usersService.findOne({
+  async findOne(@Param() { id }: IdDto) {
+    const user = await this.usersService.findOne({
       id,
     });
+
+    if (!user) {
+      throw new NotFoundException('User not found');
+    }
+
+    return user;
   }
 }
