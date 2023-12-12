@@ -4,6 +4,7 @@ import { PrismaModule } from 'nestjs-prisma';
 import { validateEnv } from 'src/common/lib/validate-env';
 
 import { AuthModule } from '../auth/auth.module';
+import { DepartmentsModule } from '../departments/departments.module';
 import { UsersModule } from '../users/users.module';
 import { AppController } from './app.controller';
 
@@ -18,6 +19,7 @@ import { AppController } from './app.controller';
     }),
     UsersModule,
     AuthModule,
+    DepartmentsModule,
   ],
   controllers: [AppController],
   providers: [],
