@@ -32,6 +32,8 @@ export const setupApp = (app: INestApplication) => {
     ],
   });
 
+  app.enableCors();
+
   // Set Swagger
   const config = new DocumentBuilder()
     .addBearerAuth()
