@@ -1,10 +1,12 @@
-import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import { ForbiddenException } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 
-@Injectable()
-export class AdminGuard implements CanActivate {
-  canActivate(context: ExecutionContext): boolean | Promise<boolean> {
-    const request = context.switchToHttp().getRequest();
+export class AdminGuard extends AuthGuard('jwt') {
+  handleRequest<TUser = any>(_: any, user: any): TUser {
+    if (!user.isAdmin) {
+      throw new ForbiddenException('Access Denied');
+    }
 
-    return request.user?.isAdmin;
+    return user;
   }
 }
